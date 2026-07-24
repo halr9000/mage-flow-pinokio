@@ -1,0 +1,8 @@
+{
+  "icon": "icon.png",
+  "posts": [
+    "https://huggingface.co/microsoft/Mage-Flow",
+    "https://github.com/microsoft/Mage",
+    "https://microsoft.github.io/Mage"
+  ]
+}
