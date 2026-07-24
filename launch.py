@@ -24,7 +24,11 @@ def main():
     app_py = os.path.join(launcher_root, "app", "mage_flow", "app.py")
 
     env = os.environ.copy()
-    env["MAGEFLOW_HF_DIR"] = repo_id
+
+    # Keep GRADIO_SERVER_NAME/GRADIO_SHARE unset; app.py uses argparse defaults
+    # (0.0.0.0:7860) which we override via --host/--port.
+    # Do NOT set MAGEFLOW_HF_DIR — that's for local checkpoint dirs, not HF repo IDs.
+    # When unset, app.py uses the real HF repo IDs (microsoft/Mage-Flow-Turbo, etc.).
 
     print(f"Launching {args.title} from {repo_id}")
     print(f"App path: {app_py}")
