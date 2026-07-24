@@ -7,7 +7,7 @@ module.exports = {
         venv: "{{args && args.venv ? args.venv : null}}",
         path: "{{args && args.path ? args.path : '.'}}",
         env: {
-          CUDA_HOME: "{{args.cuda_home}}"
+          CUDA_HOME: "{{envs.CUDA_PATH || (platform === 'win32' ? 'C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.8' : '/usr/local/cuda')}}"
         },
         message: [
           "uv pip install --force-reinstall torch==2.13.0 torchvision==0.28.0 --index-url https://download.pytorch.org/whl/{{args && args.cuda ? args.cuda : 'cu126'}}",

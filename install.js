@@ -42,34 +42,13 @@ module.exports = {
     },
     {
       when: "{{gpu === 'nvidia' && (platform === 'win32' || platform === 'linux')}}",
-      method: "shell.run",
-      params: {
-        message: {
-          _: ["python", "detect_cuda.py"]
-        }
-      },
-      on: [{
-        event: "/([A-Za-z]:\\\\.+|[\\/].+)/",
-        done: true
-      }]
-    },
-    {
-      when: "{{gpu === 'nvidia' && (platform === 'win32' || platform === 'linux')}}",
-      method: "local.set",
-      params: {
-        cuda_home: "{{input.event ? input.event[1] : ''}}"
-      }
-    },
-    {
-      when: "{{gpu === 'nvidia' && (platform === 'win32' || platform === 'linux')}}",
       method: "script.start",
       params: {
         uri: "torch.js",
         params: {
           venv: "env",
           path: "app/mage_flow",
-          cuda: "{{local.cuda_major === '13' ? 'cu130' : 'cu126'}}",
-          cuda_home: "{{local.cuda_home}}"
+          cuda: "{{local.cuda_major === '13' ? 'cu130' : 'cu126'}}"
         }
       }
     },
