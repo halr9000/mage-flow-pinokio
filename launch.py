@@ -15,25 +15,25 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", required=True, choices=list(MODEL_MAP.keys()))
     parser.add_argument("--title", required=True)
+    parser.add_argument("--host", default="0.0.0.0")
+    parser.add_argument("--port", type=int, default=7860)
     args = parser.parse_args()
 
     repo_id = MODEL_MAP[args.model]
-
-    env = os.environ.copy()
-    env["MAGEFLOW_HF_DIR"] = repo_id
-    env["GRADIO_SERVER_NAME"] = "127.0.0.1"
-    env["GRADIO_SHARE"] = "0"
-
-    # launch.py is in the Pinokio launcher root, but start.js runs from app/mage_flow
-    # So we use ../launch.py relative to the shell cwd
     launcher_root = os.path.dirname(os.path.abspath(__file__))
     app_py = os.path.join(launcher_root, "app", "mage_flow", "app.py")
 
+    env = os.environ.copy()
+    env["MAGEFLOW_HF_DIR"] = repo_id
+
     print(f"Launching {args.title} from {repo_id}")
     print(f"App path: {app_py}")
+    print(f"Binding: {args.host}:{args.port}")
 
-    # Launch the Gradio app — it reads MAGEFLOW_HF_DIR and GRADIO_SERVER_NAME
-    subprocess.run([sys.executable, app_py], env=env)
+    subprocess.run(
+        [sys.executable, app_py, "--host", args.host, "--port", str(args.port)],
+        env=env,
+    )
 
 
 if __name__ == "__main__":

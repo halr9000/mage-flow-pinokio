@@ -16,7 +16,11 @@ module.exports = {
             "--model",
             "{{args.model ? args.model : 'turbo'}}",
             "--title",
-            "{{args.title ? args.title : 'Mage-Flow Turbo'}}"
+            "{{args.title ? args.title : 'Mage-Flow Turbo'}}",
+            "--host",
+            "127.0.0.1",
+            "--port",
+            "{{port}}"
           ]
         },
         on: [{
