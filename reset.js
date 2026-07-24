@@ -4,5 +4,15 @@ module.exports = {
     params: {
       path: "app"
     }
+  }, {
+    method: "fs.rm",
+    params: {
+      path: "env"
+    }
+  }, {
+    method: "fs.rm",
+    params: {
+      path: "cache"
+    }
   }]
 }
