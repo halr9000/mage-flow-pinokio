@@ -45,11 +45,7 @@ module.exports = {
       method: "shell.run",
       params: {
         message: {
-          _: [
-            "python",
-            "-c",
-            "import subprocess,os,sys; p=subprocess.run(['where','nvcc'] if os.name=='nt' else ['which','nvcc'],capture_output=True,text=True); cuda_home=os.path.dirname(os.path.dirname(p.stdout.strip())) if p.returncode==0 else ''; print(cuda_home)"
-          ]
+          _: ["python", "detect_cuda.py"]
         }
       },
       on: [{
