@@ -88,12 +88,12 @@ module.exports = {
         }]
 
         menu.push({
-          icon: "fa-solid fa-plug",
+          icon: "fa-solid fa-arrows-rotate",
           text: "Update",
           href: "update.js"
         }, {
           icon: "fa-solid fa-plug",
-          text: "Reinstall",
+          text: "Install",
           href: "install.js"
         }, {
           icon: "fa-regular fa-circle-xmark",
