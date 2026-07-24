@@ -24,13 +24,34 @@ module.exports = {
       }
     },
     {
+      when: "{{gpu === 'nvidia'}}",
+      method: "shell.run",
+      params: {
+        message: {
+          _: ["nvcc", "--version"]
+        },
+        on: [{
+          event: "/release (\\d+)\\./",
+          done: true
+        }]
+      }
+    },
+    {
+      when: "{{gpu === 'nvidia'}}",
+      method: "local.set",
+      params: {
+        cuda_major: "{{input.event ? input.event[1] : '12'}}"
+      }
+    },
+    {
       when: "{{gpu === 'nvidia' && (platform === 'win32' || platform === 'linux')}}",
       method: "script.start",
       params: {
         uri: "torch.js",
         params: {
           venv: "env",
-          path: "app/mage_flow"
+          path: "app/mage_flow",
+          cuda: "{{local.cuda_major === '13' ? 'cu130' : 'cu126'}}"
         }
       }
     },
