@@ -12,7 +12,7 @@ module.exports = {
         message: {
           _: [
             "python",
-            "../launch.py",
+            "../../launch.py",
             "--model",
             "{{args.model ? args.model : 'turbo'}}",
             "--title",
