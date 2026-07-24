@@ -44,11 +44,13 @@ module.exports = {
       when: "{{gpu === 'nvidia' && (platform === 'win32' || platform === 'linux')}}",
       method: "shell.run",
       params: {
-        message: [
-          "python",
-          "-c",
-          "import subprocess,os,sys; p=subprocess.run(['where','nvcc'] if os.name=='nt' else ['which','nvcc'],capture_output=True,text=True); cuda_home=os.path.dirname(os.path.dirname(p.stdout.strip())) if p.returncode==0 else ''; print(cuda_home)"
-        ]
+        message: {
+          _: [
+            "python",
+            "-c",
+            "import subprocess,os,sys; p=subprocess.run(['where','nvcc'] if os.name=='nt' else ['which','nvcc'],capture_output=True,text=True); cuda_home=os.path.dirname(os.path.dirname(p.stdout.strip())) if p.returncode==0 else ''; print(cuda_home)"
+          ]
+        }
       },
       on: [{
         event: "/([A-Za-z]:\\\\.+|[\\/].+)/",
